@@ -2,19 +2,21 @@ package com.lee.androiddemo;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import com.lee.androiddemo.activity.BaseActivity;
 import com.lee.androiddemo.fragment.HomeFragment;
 import com.lee.androiddemo.fragment.MyFragment;
 import com.lee.androiddemo.view.TabView;
 
-public class FragmentTabHostActivity extends AppCompatActivity {
+import butterknife.BindView;
 
+public class FragmentTabHostActivity extends BaseActivity {
 
-    private FragmentTabHost mTabHost;
+    @BindView(R.id.fragment_tab_host)
+    FragmentTabHost mTabHost;
     //定义数组存放Fragment
     private final Class fragmentArray[] = {MyFragment.class, HomeFragment.class, MyFragment.class, MyFragment.class};
     //定义数组存放图片(存放的是图片选择器包含连个状态 press和selected)
@@ -28,20 +30,28 @@ public class FragmentTabHostActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment_tab_host);
+    }
 
+    @Override
+    protected int getContextView() {
+        return R.layout.activity_fragment_tab_host;
+    }
 
-        initFragment();
-
+    @Override
+    protected void initListener() {
         mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
                 Toast.makeText(FragmentTabHostActivity.this, tabId, Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
+    @Override
+    protected void initData() {
+        initFragment();
     }
 
     /**
@@ -49,7 +59,7 @@ public class FragmentTabHostActivity extends AppCompatActivity {
      */
 
     private void initFragment() {
-        mTabHost = (FragmentTabHost) findViewById(R.id.fragment_tab_host);
+
         mTabHost.setup(this, getSupportFragmentManager(), R.id.fl_content);//设置替换哪个布局
         int fragmentCount = fragmentArray.length;
 
@@ -75,4 +85,6 @@ public class FragmentTabHostActivity extends AppCompatActivity {
         view.setTv(mTextViewArray[i]);
         return view;
     }
+
+
 }
