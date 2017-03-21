@@ -2,7 +2,7 @@ package com.lee.androiddemo.http;
 
 import okhttp3.Call;
 
-public abstract class EventRequestCallback {
+public abstract class RequestCallback {
 
 	private Call mCall;
 	/**
@@ -10,12 +10,12 @@ public abstract class EventRequestCallback {
 	 * 
 	 * @param res
 	 */
-	public abstract void _RequestCallback(EventResponseEntity res);
+	public abstract void RequestCallback(ResponseEntity res);
 
 	/**
 	 * 请求取消
 	 */
-	public void _onCancelled() {
+	public void onCancelled() {
 	}
 
 	/**
@@ -25,14 +25,14 @@ public abstract class EventRequestCallback {
 	 * @param current
 	 * @param isUploading
 	 */
-	public void _onLoading(long total, long current, boolean isUploading) {
+	public void onLoading(long total, long current, boolean isUploading) {
 
 	}
 
 	/**
 	 * 请求开始
 	 */
-	public void _onStart() {
+	public void onStart() {
 
 	}
 

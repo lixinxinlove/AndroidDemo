@@ -2,7 +2,7 @@ package com.lee.androiddemo.http;
 
 import java.io.Serializable;
 
-public class EventResponseEntity implements Serializable {
+public class ResponseEntity implements Serializable {
 
 	/**
 	 * 

@@ -33,7 +33,7 @@ public class DataApiForOkHttp {
                 .build();
     }
 
-    public void get(String url, EventRequestCallback callback) {
+    public void get(String url, RequestCallback callback) {
         Request.Builder requestBuilder = new Request.Builder().url(url);
         requestBuilder.method(GET_METHOD, null);
         Request request = requestBuilder.build();
@@ -42,24 +42,24 @@ public class DataApiForOkHttp {
         mcall.enqueue(new EventRequestCallbackImpl(callback));
     }
 
-    public void post(FormBody body, String url, EventRequestCallback callback) {
+    public void post(FormBody body, String url, RequestCallback callback) {
         Request.Builder requestBuilder = new Request.Builder().url(url);
         //Builder builder = new Builder();
         //FormBody body = builder.add("", "").build();
         requestBuilder.post(body).build();
         Request request = requestBuilder.post(body).build();
-        Call mcall = http.newCall(request);
-        mcall.enqueue(new EventRequestCallbackImpl(callback));
+        Call mCall = http.newCall(request);
+        mCall.enqueue(new EventRequestCallbackImpl(callback));
     }
 
 
-    public void getData(String url, EventRequestCallback callback) {
+    public void getData(String url, RequestCallback callback) {
         Request.Builder requestBuilder = new Request.Builder().url(url);
         requestBuilder.method(GET_METHOD, null);
         Request request = requestBuilder.build();
-        Call mcall = http.newCall(request);
-        callback.setmCall(mcall);
-        mcall.enqueue(new MyEventRequestCallbackImpl(callback));
+        Call mCall = http.newCall(request);
+        callback.setmCall(mCall);
+        mCall.enqueue(new MyEventRequestCallbackImpl(callback));
     }
 
 
@@ -70,7 +70,7 @@ public class DataApiForOkHttp {
      * @param url
      * @param callback
      */
-    public void postAsync(FormBody body, String url, EventRequestCallback callback) {
+    public void postAsync(FormBody body, String url, RequestCallback callback) {
         Request.Builder requestBuilder = new Request.Builder().url(url);
         //Builder builder = new Builder();
         //FormBody body = builder.add("", "").build();
@@ -86,16 +86,16 @@ public class DataApiForOkHttp {
      */
     public class EventRequestCallbackImpl implements Callback {
 
-        private EventRequestCallback mCallback;
+        private RequestCallback mCallback;
 
-        private EventResponseEntity resEntity = new EventResponseEntity();
+        private ResponseEntity resEntity = new ResponseEntity();
 
-        public EventRequestCallbackImpl(EventRequestCallback callback) {
+        public EventRequestCallbackImpl(RequestCallback callback) {
             this.mCallback = callback;
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    mCallback._onStart();
+                    mCallback.onStart();
                 }
             });
         }
@@ -107,7 +107,7 @@ public class DataApiForOkHttp {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    mCallback._RequestCallback(resEntity);
+                    mCallback.RequestCallback(resEntity);
                 }
             });
         }
@@ -121,7 +121,7 @@ public class DataApiForOkHttp {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            mCallback._RequestCallback(resEntity);
+                            mCallback.RequestCallback(resEntity);
                         }
                     });
                 } catch (Exception e) {
@@ -133,7 +133,7 @@ public class DataApiForOkHttp {
 
                         @Override
                         public void run() {
-                            mCallback._RequestCallback(resEntity);
+                            mCallback.RequestCallback(resEntity);
                         }
                     });
                 }
@@ -146,16 +146,16 @@ public class DataApiForOkHttp {
      */
     public class MyEventRequestCallbackImpl implements Callback {
 
-        private EventRequestCallback mCallback;
+        private RequestCallback mCallback;
 
-        private EventResponseEntity resEntity = new EventResponseEntity();
+        private ResponseEntity resEntity = new ResponseEntity();
 
-        public MyEventRequestCallbackImpl(EventRequestCallback callback) {
+        public MyEventRequestCallbackImpl(RequestCallback callback) {
             this.mCallback = callback;
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    mCallback._onStart();
+                    mCallback.onStart();
                 }
             });
         }
@@ -171,7 +171,7 @@ public class DataApiForOkHttp {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    mCallback._RequestCallback(resEntity);
+                    mCallback.RequestCallback(resEntity);
                 }
             });
         }
@@ -184,7 +184,7 @@ public class DataApiForOkHttp {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    mCallback._RequestCallback(resEntity);
+                    mCallback.RequestCallback(resEntity);
                 }
             });
         }
@@ -196,16 +196,16 @@ public class DataApiForOkHttp {
      */
     public class EventRequestCallbackAsyncImpl implements Callback {
 
-        private EventRequestCallback mCallback;
+        private RequestCallback mCallback;
 
-        private EventResponseEntity resEntity = new EventResponseEntity();
+        private ResponseEntity resEntity = new ResponseEntity();
 
-        public EventRequestCallbackAsyncImpl(EventRequestCallback callback) {
+        public EventRequestCallbackAsyncImpl(RequestCallback callback) {
             this.mCallback = callback;
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    mCallback._onStart();
+                    mCallback.onStart();
                 }
             });
         }
@@ -216,13 +216,13 @@ public class DataApiForOkHttp {
                 String res = response.body().string();
                 try {
                     resEntity = GsonUtils.asJSONToResponseEntity(res);
-                    mCallback._RequestCallback(resEntity);
+                    mCallback.RequestCallback(resEntity);
                 } catch (Exception e) {
                     e.printStackTrace();
                     resEntity.code = Config.HTTP_REQUEST_JSON_ERROR;
                     resEntity.message = "数据格式错误";
                     resEntity.data = res;
-                    mCallback._RequestCallback(resEntity);
+                    mCallback.RequestCallback(resEntity);
                 }
             }
         }
@@ -232,7 +232,7 @@ public class DataApiForOkHttp {
             resEntity.code = Config.HTTP_REQUEST_FAILURE;
             resEntity.data = "";
             resEntity.message = "网络异常";
-            mCallback._RequestCallback(resEntity);
+            mCallback.RequestCallback(resEntity);
         }
     }
 

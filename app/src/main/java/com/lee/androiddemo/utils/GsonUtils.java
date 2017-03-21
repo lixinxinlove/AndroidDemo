@@ -5,7 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.lee.androiddemo.http.EventResponseEntity;
+import com.lee.androiddemo.http.ResponseEntity;
 
 import java.lang.reflect.Type;
 
@@ -100,7 +100,7 @@ public class GsonUtils {
 		return jsonElement.isJsonArray();
 	}
 
-	public static EventResponseEntity asJSONToResponseEntity(String json) {
+	public static ResponseEntity asJSONToResponseEntity(String json) {
 		JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
 		String code = obj.get("code").getAsString();
 		String message = obj.get("message").getAsString();
@@ -112,7 +112,7 @@ public class GsonUtils {
 			else if (dataobj.isJsonArray())
 				data = dataobj.getAsJsonArray().toString();
 		}
-		EventResponseEntity entity = new EventResponseEntity();
+		ResponseEntity entity = new ResponseEntity();
 		entity.code = code;
 		entity.message = message;
 		entity.data = data;

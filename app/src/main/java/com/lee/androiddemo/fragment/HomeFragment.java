@@ -9,7 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.lee.androiddemo.App;
 import com.lee.androiddemo.R;
+import com.lee.androiddemo.http.RequestCallback;
+import com.lee.androiddemo.http.ResponseEntity;
 
 
 public class HomeFragment extends BaseFragment {
@@ -49,6 +52,9 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initData() {
         tv.setText(title);
+
+        App.api.login(callback);
+
     }
 
     @Override
@@ -68,4 +74,14 @@ public class HomeFragment extends BaseFragment {
         super.onDetach();
 
     }
+
+    private RequestCallback callback=new RequestCallback() {
+        @Override
+        public void RequestCallback(ResponseEntity res) {
+           if (res.code.equals("0")){
+               tv.setText(res.data);
+           }
+        }
+    };
+
 }
