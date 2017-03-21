@@ -1,4 +1,4 @@
-package com.lee.androiddemo;
+package com.lee.androiddemo.activity;
 
 import android.Manifest;
 import android.app.Activity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Toast;
+
+import com.lee.androiddemo.R;
 
 import java.util.List;
 

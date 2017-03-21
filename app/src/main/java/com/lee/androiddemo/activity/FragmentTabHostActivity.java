@@ -1,4 +1,4 @@
-package com.lee.androiddemo;
+package com.lee.androiddemo.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TabHost;
 import android.widget.Toast;
 
-import com.lee.androiddemo.activity.BaseActivity;
+import com.lee.androiddemo.R;
 import com.lee.androiddemo.fragment.HomeFragment;
 import com.lee.androiddemo.fragment.MyFragment;
 import com.lee.androiddemo.view.TabView;
