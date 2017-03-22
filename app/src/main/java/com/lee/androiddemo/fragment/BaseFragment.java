@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by android on 2017/3/20.
  */
@@ -26,6 +28,7 @@ public abstract class BaseFragment extends Fragment {
 
         if (rootView == null) {
             rootView = inflater.inflate(getContextView(), null);
+            ButterKnife.bind(rootView);
             findView();
             initListener();
             initData();

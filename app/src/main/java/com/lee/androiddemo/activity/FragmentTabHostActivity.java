@@ -7,6 +7,7 @@ import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.lee.androiddemo.R;
+import com.lee.androiddemo.fragment.FlexboxFragment;
 import com.lee.androiddemo.fragment.HomeFragment;
 import com.lee.androiddemo.fragment.MyFragment;
 import com.lee.androiddemo.view.TabView;
@@ -18,7 +19,7 @@ public class FragmentTabHostActivity extends BaseActivity {
     @BindView(R.id.fragment_tab_host)
     FragmentTabHost mTabHost;
     //定义数组存放Fragment
-    private final Class fragmentArray[] = {MyFragment.class, HomeFragment.class, MyFragment.class, MyFragment.class};
+    private final Class fragmentArray[] = {MyFragment.class, HomeFragment.class, FlexboxFragment.class, MyFragment.class};
     //定义数组存放图片(存放的是图片选择器包含连个状态 press和selected)
     private int mImageViewArray[] = {R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
