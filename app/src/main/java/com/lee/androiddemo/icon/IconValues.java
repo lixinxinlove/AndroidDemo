@@ -15,5 +15,5 @@ public class IconValues {
             R.drawable.tab_selector_d,};
 
 
-    public static String[] homeTabTextArr = {"首页", "分类", "购物车", "我的"};
+    public static String[] homeTabTextArr = {"我的", "收藏", "世界", "支付"};
 }
