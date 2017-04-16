@@ -19,6 +19,7 @@
         android:layout_below="@id/iv"
         android:layout_centerHorizontal="true"
         android:text="lee"
+        android:textColor="@color/tab_text_selector"
         android:textSize="12sp" />
 
 </RelativeLayout>

@@ -2,14 +2,15 @@ package com.lee.androiddemo.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
+import android.util.Log;
 import android.view.View;
 import android.widget.TabHost;
-import android.widget.Toast;
 
 import com.lee.androiddemo.R;
 import com.lee.androiddemo.fragment.FlexboxFragment;
 import com.lee.androiddemo.fragment.HomeFragment;
 import com.lee.androiddemo.fragment.MyFragment;
+import com.lee.androiddemo.icon.IconValues;
 import com.lee.androiddemo.view.TabView;
 
 import butterknife.BindView;
@@ -20,15 +21,9 @@ public class FragmentTabHostActivity extends BaseActivity {
     FragmentTabHost mTabHost;
     //定义数组存放Fragment
     private final Class fragmentArray[] = {MyFragment.class, HomeFragment.class, FlexboxFragment.class, MyFragment.class};
-    //定义数组存放图片(存放的是图片选择器包含连个状态 press和selected)
-    private int mImageViewArray[] = {R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher};
-    //Tab选项卡的文字
-    private String mTextViewArray[] = {"首页", "分类", "购物车", "我的"};
+    private int mImageViewArray[] = IconValues.homeTabArr;
+    private String mTextViewArray[] = IconValues.homeTabTextArr;
     private String mTabIdArray[] = {"home", "lll", "eee", "my"};
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +40,7 @@ public class FragmentTabHostActivity extends BaseActivity {
         mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
-                Toast.makeText(FragmentTabHostActivity.this, tabId, Toast.LENGTH_SHORT).show();
+                Log.e("tab", tabId);
             }
         });
     }
@@ -71,7 +66,6 @@ public class FragmentTabHostActivity extends BaseActivity {
             Bundle bundle = new Bundle();
             bundle.putString("title", "lee");
             mTabHost.addTab(tabSpec, fragmentArray[i], bundle);
-            //  mTabHost.getTabWidget().setDividerDrawable(mImageViewArray[i]);//设置每个TabView的控件
         }
     }
 
@@ -82,10 +76,8 @@ public class FragmentTabHostActivity extends BaseActivity {
      */
     private View getTabItemView(int i) {
         TabView view = new TabView(this);
-        view.setIv(R.mipmap.ic_launcher);
+        view.setIv(mImageViewArray[i]);
         view.setTv(mTextViewArray[i]);
         return view;
     }
-
-
 }
