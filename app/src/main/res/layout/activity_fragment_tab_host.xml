@@ -13,6 +13,7 @@
     </FrameLayout>
 
     <android.support.v4.app.FragmentTabHost
+        android:background="@color/colorAccent"
         android:id="@+id/fragment_tab_host"
         android:layout_width="match_parent"
         android:layout_height="55dp" />
