@@ -10,6 +10,7 @@ import com.lee.androiddemo.R;
 import com.lee.androiddemo.fragment.FlexboxFragment;
 import com.lee.androiddemo.fragment.HomeFragment;
 import com.lee.androiddemo.fragment.MyFragment;
+import com.lee.androiddemo.fragment.ViewFragment;
 import com.lee.androiddemo.icon.IconValues;
 import com.lee.androiddemo.view.TabView;
 
@@ -20,7 +21,7 @@ public class FragmentTabHostActivity extends BaseActivity {
     @BindView(R.id.fragment_tab_host)
     FragmentTabHost mTabHost;
     //定义数组存放Fragment
-    private final Class fragmentArray[] = {MyFragment.class, HomeFragment.class, FlexboxFragment.class, MyFragment.class};
+    private final Class fragmentArray[] = {MyFragment.class, HomeFragment.class, FlexboxFragment.class, ViewFragment .class};
     private int mImageViewArray[] = IconValues.homeTabArr;
     private String mTextViewArray[] = IconValues.homeTabTextArr;
     private String mTabIdArray[] = {"home", "lll", "eee", "my"};

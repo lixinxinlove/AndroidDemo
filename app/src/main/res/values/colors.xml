@@ -5,4 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlank">#AA000000</color>
     <color name="colorRed">#AACCCCCC</color>
+    <color name="myColor">#BBCCCCCC</color>
+
+    <color name="color1">#88303F9F</color>
+    <color name="color2">#88FF4081</color>
+
 </resources>
