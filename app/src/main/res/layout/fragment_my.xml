@@ -5,9 +5,8 @@
     tools:context="com.lee.androiddemo.fragment.MyFragment">
 
 
-    <TextView
+    <com.lee.androiddemo.view.PathBezierView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="my" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

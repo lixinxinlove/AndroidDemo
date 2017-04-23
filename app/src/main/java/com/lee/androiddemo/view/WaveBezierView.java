@@ -2,6 +2,7 @@ package com.lee.androiddemo.view;
 
 /**
  * Created by lixinxin on 2017/4/23.
+ * 水波纹动画
  */
 
 import android.animation.ValueAnimator;
@@ -11,6 +12,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.LinearInterpolator;
 
 import com.lee.androiddemo.R;
@@ -156,7 +158,7 @@ public class WaveBezierView extends View implements View.OnClickListener {
         mValueAnimator1 = ValueAnimator.ofInt(0, mWaveLength);
         mValueAnimator1.setDuration(2000);
         mValueAnimator1.setRepeatCount(ValueAnimator.INFINITE);
-        mValueAnimator1.setInterpolator(new LinearInterpolator());
+        mValueAnimator1.setInterpolator(new AnticipateOvershootInterpolator());
         mValueAnimator1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -168,7 +170,7 @@ public class WaveBezierView extends View implements View.OnClickListener {
         mValueAnimator2 = ValueAnimator.ofInt(0, mWaveLength);
         mValueAnimator2.setDuration(2500);
         mValueAnimator2.setRepeatCount(ValueAnimator.INFINITE);
-        mValueAnimator2.setInterpolator(new LinearInterpolator());
+        mValueAnimator2.setInterpolator(new AnticipateOvershootInterpolator());
         mValueAnimator2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
