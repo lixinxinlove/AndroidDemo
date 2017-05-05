@@ -1,13 +1,19 @@
 package com.lee.androiddemo.fragment;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.lee.androiddemo.R;
+import com.lee.androiddemo.activity.CalendarActivity;
 
 
-public class MyFragment extends BaseFragment {
+public class MyFragment extends BaseFragment implements View.OnClickListener {
+
+
+    Button btnCalender;
 
     public MyFragment() {
     }
@@ -15,7 +21,8 @@ public class MyFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("MyFragment","onCreate");
+        Log.e("MyFragment", "onCreate");
+
     }
 
     @Override
@@ -25,7 +32,7 @@ public class MyFragment extends BaseFragment {
 
     @Override
     protected void findView() {
-
+        btnCalender = (Button) rootView.findViewById(R.id.btn_calender);
     }
 
     @Override
@@ -35,16 +42,12 @@ public class MyFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
-
+        btnCalender.setOnClickListener(this);
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onClick(View v) {
+        getActivity().startActivity(new Intent(getActivity(), CalendarActivity.class));
     }
 }

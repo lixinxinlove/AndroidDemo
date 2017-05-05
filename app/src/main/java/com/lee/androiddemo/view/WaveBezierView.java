@@ -137,8 +137,6 @@ public class WaveBezierView extends View implements View.OnClickListener {
         mPath2.lineTo(0, mScreenHeight);
         mPath2.close();
         canvas.drawPath(mPath2, mPaintBezier2);
-
-
     }
 
     @Override

@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment extends Fragment {
 
 
-    protected View rootView;
+    public View rootView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
