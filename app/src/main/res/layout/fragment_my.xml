@@ -15,5 +15,17 @@
         android:layout_height="wrap_content"
         android:text="自定义日历" />
 
+    <Button
+        android:layout_marginTop="50dp"
+        android:id="@+id/btn_anim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="水波纹动画"/>
+    <Button
+        android:layout_marginTop="100dp"
+        android:id="@+id/btn_chart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="图表"/>
 
 </FrameLayout>

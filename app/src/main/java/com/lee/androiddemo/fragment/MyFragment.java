@@ -7,13 +7,17 @@ import android.view.View;
 import android.widget.Button;
 
 import com.lee.androiddemo.R;
+import com.lee.androiddemo.activity.AnimatorActivity;
 import com.lee.androiddemo.activity.CalendarActivity;
+import com.lee.androiddemo.activity.MPAndroidChartActivity;
 
 
 public class MyFragment extends BaseFragment implements View.OnClickListener {
 
 
     Button btnCalender;
+    Button btnAnim;
+    Button btnChart;
 
     public MyFragment() {
     }
@@ -33,6 +37,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     @Override
     protected void findView() {
         btnCalender = (Button) rootView.findViewById(R.id.btn_calender);
+        btnAnim = (Button) rootView.findViewById(R.id.btn_anim);
+        btnChart = (Button) rootView.findViewById(R.id.btn_chart);
     }
 
     @Override
@@ -43,11 +49,27 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     @Override
     protected void initListener() {
         btnCalender.setOnClickListener(this);
+        btnAnim.setOnClickListener(this);
+        btnChart.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
-        getActivity().startActivity(new Intent(getActivity(), CalendarActivity.class));
+        switch (v.getId()) {
+            case R.id.btn_anim:
+                getActivity().startActivity(new Intent(getActivity(), AnimatorActivity.class));
+                break;
+            case R.id.btn_calender:
+                getActivity().startActivity(new Intent(getActivity(), CalendarActivity.class));
+                break;
+            case R.id.btn_chart:
+                getActivity().startActivity(new Intent(getActivity(), MPAndroidChartActivity.class));
+                break;
+            default:
+                break;
+        }
+
+
     }
 }
