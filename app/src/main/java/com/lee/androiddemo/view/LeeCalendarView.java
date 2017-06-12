@@ -9,13 +9,15 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.lee.androiddemo._interface.ICalendarViewCallback;
+
 import java.util.Calendar;
 
 /**
- * Created by lixinxin on 2017/5/5.
+ * Created by lixinxin on 2017/4/27.
+ * 时间日历
  */
-
-public class CalendarView extends View implements View.OnTouchListener {
+public class LeeCalendarView extends View implements View.OnTouchListener {
 
     //顶部的提示
     private String headText;
@@ -27,8 +29,18 @@ public class CalendarView extends View implements View.OnTouchListener {
     private int currentMonth;
     //记录当前的日
     private int currentDate;
+
+    private int mCurrentYear;
+
+    private int mCurrentMonth;
+
     //被点击的日期
     private int selectedDate = -1;
+
+    public void setSelectedDate(int i) {
+        selectedDate = i;
+    }
+
     //单个日期的 宽
     private float cellWidth;
     //单个日期的 高
@@ -45,6 +57,8 @@ public class CalendarView extends View implements View.OnTouchListener {
     private Paint mSmallTextPaint;
     //矩形
     private Paint mRectanglePaint;
+    //背景
+    private Paint mBgPaint;
     //当前的日期
     private Paint mRedPaint;
     //字体大小
@@ -60,21 +74,26 @@ public class CalendarView extends View implements View.OnTouchListener {
     //共需要多少行
     private int row;
     //放每一天
-    private int[] calenderDays = new int[42];
+    // private int[] calenderDays = new int[42];
+
+    private DayEntity[] mCalenderDays = new DayEntity[42];
 
     private Calendar calendar;
     private Calendar mCalendar;
     private Calendar tempCalendar;
 
-    public CalendarView(Context context) {
+    private Calendar todayCalendar = Calendar.getInstance();
+    private DayEntity todayEntity = new DayEntity();
+
+    public LeeCalendarView(Context context) {
         this(context, null);
     }
 
-    public CalendarView(Context context, AttributeSet attrs) {
+    public LeeCalendarView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CalendarView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public LeeCalendarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         initPaint();
@@ -117,9 +136,19 @@ public class CalendarView extends View implements View.OnTouchListener {
 
         mRectanglePaint = new Paint();
         mRectanglePaint.setAntiAlias(true);
-        mRectanglePaint.setColor(0xffFFC2B8);
+        mRectanglePaint.setColor(0xFFF15A4A);
         mRectanglePaint.setStyle(Paint.Style.FILL);
 
+
+        mBgPaint = new Paint();
+        mBgPaint.setAntiAlias(true);
+        mBgPaint.setColor(0xFFFCD7D3);
+        mBgPaint.setStyle(Paint.Style.FILL);
+
+        //今天
+        todayEntity.setYear(todayCalendar.get(Calendar.YEAR));
+        todayEntity.setMonth(todayCalendar.get(Calendar.MONTH) + 1);
+        todayEntity.setDay(todayCalendar.get(Calendar.DATE));
 
     }
 
@@ -139,6 +168,8 @@ public class CalendarView extends View implements View.OnTouchListener {
         tempCalendar.set(mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DATE));
 
         //今天的日期
+        mCurrentYear = calendar.get(Calendar.YEAR);
+        mCurrentMonth = calendar.get(Calendar.MONTH) + 1;
         currentDate = calendar.get(Calendar.DATE);
 
         //1.获取当月一共有多少天
@@ -152,9 +183,9 @@ public class CalendarView extends View implements View.OnTouchListener {
         //3.获取行数
         row = getRow();
 
-        Log.e("Date", "本月有多少天--" + countDay);
-        Log.e("Date", "1号是周几--" + dayOfWeek);
-        Log.e("Date", "一个月的日历的高度--" + row);
+//        Log.e("Date", "本月有多少天--" + countDay);
+//        Log.e("Date", "1号是周几--" + dayOfWeek);
+//        Log.e("Date", "一个月的日历的高度--" + row);
 
         /**
          *初始化一个月
@@ -163,7 +194,14 @@ public class CalendarView extends View implements View.OnTouchListener {
         calendar.add(Calendar.DATE, -dayOfWeek - 1);
         for (int i = 0; i < 7 * row; i++) {
             calendar.add(Calendar.DATE, 1);
-            calenderDays[i] = calendar.get(Calendar.DATE);
+            //  calenderDays[i] = calendar.get(Calendar.DATE);
+
+            DayEntity dayView = new DayEntity();
+            dayView.setIndex(i);
+            dayView.setYear(calendar.get(Calendar.YEAR));
+            dayView.setMonth(calendar.get(Calendar.MONTH) + 1);
+            dayView.setDay(calendar.get(Calendar.DATE));
+            mCalenderDays[i] = dayView;
         }
         calendar.set(mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DATE));
     }
@@ -180,7 +218,6 @@ public class CalendarView extends View implements View.OnTouchListener {
         init();
     }
 
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -188,14 +225,11 @@ public class CalendarView extends View implements View.OnTouchListener {
         cellWidth = width / 7;
         cellHeight = cellWidth;
         headHeight = cellHeight;
-
         textSize = cellWidth * 0.3f;
         mDayPaint.setTextSize(textSize);
         height = (int) (row * cellHeight + headHeight);
         mSmallTextPaint.setTextSize(cellHeight * 0.2f);
-
         mHeadPaint.setTextSize(cellHeight * 0.35f);
-
         setMeasuredDimension(width, height);
     }
 
@@ -203,26 +237,38 @@ public class CalendarView extends View implements View.OnTouchListener {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        // canvas.drawB
-
+        //画头部日期
         drawHeadText(canvas);
-        Calendar c = Calendar.getInstance();
+
         for (int i = 0; i < 7 * row; i++) {
-            if (calenderDays[i] == selectedDate) {
-                //drawCircle(canvas, i, mCirclePaint, cellHeight / 2);
+            //画多选的背景
+            if (startDayEntity != null && endDayEntity != null) {
+                if (mCalenderDays[i].isAfter(startDayEntity) && mCalenderDays[i].isBefore(endDayEntity)) {
+                    drawBg(canvas, i);
+                }
+                if (mCalenderDays[i].equals(startDayEntity) || mCalenderDays[i].equals(endDayEntity)) {
+                    drawRectangle(canvas, i);
+                }
+            }
+
+
+            //点的位置
+            if (mCalenderDays[i].getDay() == selectedDate) {
                 drawRectangle(canvas, i);
             }
-            if (currentDate == calenderDays[i] && c.get(Calendar.MONTH) + 1 == currentMonth) {
-                drawCircle(canvas, i, mTodayPaint, (float) (cellHeight * 0.4));
+
+            //默认被选中的
+            if (mSelectedDay != null) {
+                if (mSelectedDay.equals(mCalenderDays[i])) {
+                    drawRectangle(canvas, i);
+                }
             }
-
-            drawDayText(canvas, i, mDayPaint, calenderDays[i]);
-            //drawSmallText(canvas, i, mSmallTextPaint, calenderDays[i]);
-            //drawCoordinate(canvas, i);
-
-            drawCoordinate(canvas, i);
+            //画日期
+            drawDayText(canvas, i, mDayPaint, mCalenderDays[i]);
         }
+
+        //画底部的分割线
+        drawFooter(canvas);
     }
 
     /**
@@ -237,12 +283,16 @@ public class CalendarView extends View implements View.OnTouchListener {
             mHeadPaint.getTextBounds(headText, 0, headText.length(), bounds);
             int textWidth = bounds.width();
             int textHeight = bounds.height();
-
             float startX = width / 2 - textWidth / 2;
             float startY = +cellHeight / 2 + textHeight / 2;
-
             canvas.drawText(headText, startX, startY, mHeadPaint);
         }
+    }
+
+
+    private void drawFooter(Canvas canvas) {
+        mHeadPaint.setColor(0xff888888);
+        canvas.drawLine(0, height, width, height, mHeadPaint);
     }
 
 
@@ -252,39 +302,74 @@ public class CalendarView extends View implements View.OnTouchListener {
      * @param canvas
      * @param index
      */
-    private void drawDayText(Canvas canvas, int index, Paint paint, int t) {
+    private void drawDayText(Canvas canvas, int index, Paint paint, DayEntity dayEntity) {
         if (isIllegalIndex(index)) {
             return;
         }
         int x = getXByIndex(index);
         int y = getYByIndex(index);
-
-        String text = t + "";
+        String text;
+        if (dayEntity.equals(todayEntity)) {
+            text = "今天";
+        } else {
+            text = dayEntity.getDay() + "";
+        }
 
         Rect bounds = new Rect();// 矩形
         paint.getTextBounds(text, 0, text.length(), bounds);
         int textWidth = bounds.width();
         int textHeight = bounds.height();
-
         float startX = cellWidth * x + cellWidth / 2 - textWidth / 2;
         float startY = cellHeight * y + cellHeight / 2 + textHeight / 2 + headHeight;
 
         //获取指定日期是星期几
-        tempCalendar.set(calendar.DAY_OF_MONTH, t);
+        //  tempCalendar.set(calendar.DAY_OF_MONTH, t);
+        //星期天 变色
+//        if (x == 0 || x == 6) {
+//           // paint.setColor(0xff0000ff);
+//        } else {
+//            paint.setColor(0xff000000);
+//        }
 
-        if (x == 0 || x == 6) {
-            paint.setColor(0xff0000ff);
+//        if (index < dayOfWeek || index >= countDay + dayOfWeek) {
+//            paint.setColor(0xffcccccc);
+//        }
+
+        if (selectedDate == dayEntity.getDay()) {
+            paint.setColor(0xffffffff);
         } else {
             paint.setColor(0xff000000);
         }
 
-        if (index < dayOfWeek || index >= countDay + dayOfWeek) {
+        if (startDayEntity != null && endDayEntity != null) {
+            if (startDayEntity.equals(dayEntity) || endDayEntity.equals(dayEntity)) {
+                paint.setColor(0xffffffff);
+            } else {
+                paint.setColor(0xff000000);
+            }
+        }
+
+        if (startRange != null && endRange != null) {
+            if (dayEntity.isBefore(startRange) || dayEntity.isAfter(endRange)) {
+                paint.setColor(0xffcccccc);
+            } else {
+                //可点击范围
+                paint.setColor(0xff000000);
+                if (dayEntity.equals(startRange) || dayEntity.equals(endRange)) {
+                    paint.setColor(0xffcccccc);
+                }
+            }
+        }
+
+        // 在今天之后
+        if (dayEntity.isAfter(todayEntity)) {
             paint.setColor(0xffcccccc);
+        } else {
+            paint.setColor(0xff000000);
         }
 
         canvas.drawText(text, startX, startY, paint);
     }
-
 
     /**
      * 绘制 班 和 休
@@ -363,6 +448,19 @@ public class CalendarView extends View implements View.OnTouchListener {
     }
 
 
+    private void drawBg(Canvas canvas, int index) {
+        if (isIllegalIndex(index)) {
+            return;
+        }
+        int x = getXByIndex(index);
+        int y = getYByIndex(index);
+
+        float startX = cellWidth * x;
+        float startY = cellHeight * y + headHeight;
+        canvas.drawRect(startX, startY, startX + cellWidth, startY + cellHeight, mBgPaint);
+    }
+
+
     /**
      * 绘制 坐标
      *
@@ -391,8 +489,8 @@ public class CalendarView extends View implements View.OnTouchListener {
      */
     private boolean isIllegalIndex(int index) {
         if (index < dayOfWeek || index > dayOfWeek + countDay - 1) {
-            return false;
-            // return true;
+            // return false;
+            return true;
         }
         return false;
     }
@@ -461,10 +559,20 @@ public class CalendarView extends View implements View.OnTouchListener {
                     if (i < dayOfWeek || i >= dayOfWeek + countDay || i == -1) {
                         Log.e("Date", "点击的是" + i);
                     } else {
-                        selectedDate = calenderDays[i];
-                        invalidate();
-                        if (callback != null) {
-                            callback.onClickeDay(selectedDate);
+                        selectedDate = mCalenderDays[i].getDay();
+
+                        if (startRange != null && endRange != null) {
+                            if (mCalenderDays[i].isAfter(startRange) && mCalenderDays[i].isBefore(endRange)) {
+                                invalidate();
+                                if (callback != null) {
+                                    callback.onSelectedDate(this, mCalenderDays[i]);
+                                }
+                            }
+                        } else {
+                            invalidate();
+                            if (callback != null) {
+                                callback.onSelectedDate(this, mCalenderDays[i]);
+                            }
                         }
                     }
                     Log.e("Date", "点击的是" + i);
@@ -496,23 +604,80 @@ public class CalendarView extends View implements View.OnTouchListener {
     }
 
 
+    private DayEntity startDayEntity;
+    private DayEntity endDayEntity;
+
+    /**
+     * 设置开始 和 结束时间
+     *
+     * @param startDayView
+     * @param endDayView
+     */
+    public void setStartEndDay(DayEntity startDayView, DayEntity endDayView) {
+        this.startDayEntity = startDayView;
+        this.endDayEntity = endDayView;
+    }
+
+    public void refresh() {
+        invalidate();
+    }
+
+    public void refresh2(boolean falg) {
+        if (falg) {
+            selectedDate = -1;
+        }
+        startDayEntity = null;
+        endDayEntity = null;
+        invalidate();
+    }
+
+
+    private DayEntity startRange;
+    private DayEntity endRange;
+
+    /**
+     * s设置点击的范围
+     */
+    public void setClickRange(DayEntity dayRange) {
+
+        startRange = new DayEntity();
+        endRange = new DayEntity();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, dayRange.getYear());
+        calendar.set(Calendar.MONTH, dayRange.getMonth() - 1);
+        calendar.set(Calendar.DATE, dayRange.getDay());
+
+        calendar.add(Calendar.DATE, -30);
+        startRange.setYear(calendar.get(Calendar.YEAR));
+        startRange.setMonth(calendar.get(Calendar.MONTH) + 1);
+        startRange.setDay(calendar.get(Calendar.DATE));
+
+        calendar.add(Calendar.DATE, 60);
+
+        endRange.setYear(calendar.get(Calendar.YEAR));
+        endRange.setMonth(calendar.get(Calendar.MONTH) + 1);
+        endRange.setDay(calendar.get(Calendar.DATE));
+
+    }
+
+    private DayEntity mSelectedDay;
+
+    public void setSelectedDay(DayEntity mSelectedDay) {
+        this.mSelectedDay = mSelectedDay;
+    }
+
+
     //=======================接口========================================
 
 
-    private ICalendrViewCallback callback;
+    private ICalendarViewCallback callback;
 
-    public void setICalendrViewCallback(ICalendrViewCallback callback) {
+    public void setICalendrViewCallback(ICalendarViewCallback callback) {
         this.callback = callback;
 
         if (callback != null) {
             callback.onToday(selectedDate);
         }
     }
-
-    public interface ICalendrViewCallback {
-        void onToday(int date);
-
-        void onClickeDay(int date);
-    }
-
 }
