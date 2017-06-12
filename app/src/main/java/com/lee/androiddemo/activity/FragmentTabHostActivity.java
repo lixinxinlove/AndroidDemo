@@ -12,9 +12,13 @@ import com.lee.androiddemo.fragment.HomeFragment;
 import com.lee.androiddemo.fragment.MyFragment;
 import com.lee.androiddemo.fragment.ViewFragment;
 import com.lee.androiddemo.icon.IconValues;
+import com.lee.androiddemo.rxbus.Action;
+import com.lee.androiddemo.rxbus.RxBus;
 import com.lee.androiddemo.view.TabView;
 
 import butterknife.BindView;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class FragmentTabHostActivity extends BaseActivity {
 
@@ -29,6 +33,29 @@ public class FragmentTabHostActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        RxBus.getDefault().toObservable(Action.class).subscribeWith(new Observer<Action>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Action value) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
     }
 
     @Override
