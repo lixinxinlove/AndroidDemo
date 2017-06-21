@@ -1,5 +1,6 @@
 package com.lee.androiddemo.activity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.util.Log;
@@ -39,6 +40,10 @@ public class FragmentTabHostActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Typeface typeFace = Typeface.createFromAsset(getAssets(), "bebasneue_webfont.ttf");
+        //revenueSum.setTypeface(typeFace);
+
 
         rxSbscription = RxBus.getDefault().toObservable(Action.class).subscribeWith(new Observer<Action>() {
             @Override
