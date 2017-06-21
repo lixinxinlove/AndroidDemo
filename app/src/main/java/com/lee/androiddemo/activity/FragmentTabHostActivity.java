@@ -16,6 +16,9 @@ import com.lee.androiddemo.rxbus.Action;
 import com.lee.androiddemo.rxbus.RxBus;
 import com.lee.androiddemo.view.TabView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -25,16 +28,19 @@ public class FragmentTabHostActivity extends BaseActivity {
     @BindView(R.id.fragment_tab_host)
     FragmentTabHost mTabHost;
     //定义数组存放Fragment
-    private final Class fragmentArray[] = {MyFragment.class, HomeFragment.class, FlexboxFragment.class, ViewFragment .class};
+    private final Class fragmentArray[] = {MyFragment.class, HomeFragment.class, FlexboxFragment.class, ViewFragment.class};
     private int mImageViewArray[] = IconValues.homeTabArr;
     private String mTextViewArray[] = IconValues.homeTabTextArr;
     private String mTabIdArray[] = {"home", "lll", "eee", "my"};
+
+    List<Observer<Action>> listS = new ArrayList<>();
+    Observer<Action> rxSbscription;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        RxBus.getDefault().toObservable(Action.class).subscribeWith(new Observer<Action>() {
+        rxSbscription = RxBus.getDefault().toObservable(Action.class).subscribeWith(new Observer<Action>() {
             @Override
             public void onSubscribe(Disposable d) {
 
@@ -55,6 +61,7 @@ public class FragmentTabHostActivity extends BaseActivity {
 
             }
         });
+
 
     }
 
@@ -85,6 +92,7 @@ public class FragmentTabHostActivity extends BaseActivity {
     private void initFragment() {
 
         mTabHost.setup(this, getSupportFragmentManager(), R.id.fl_content);//设置替换哪个布局
+        mTabHost.getTabWidget().setDividerDrawable(R.color.tr);
         int fragmentCount = fragmentArray.length;
 
         for (int i = 0; i < fragmentCount; i++) {
@@ -107,5 +115,10 @@ public class FragmentTabHostActivity extends BaseActivity {
         view.setIv(mImageViewArray[i]);
         view.setTv(mTextViewArray[i]);
         return view;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

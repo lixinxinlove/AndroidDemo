@@ -16,4 +16,6 @@
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="granted_base_permission_for_app">perission_for_app</string>
+    <string name="confirm">确定</string>
 </resources>
