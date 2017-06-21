@@ -16,16 +16,25 @@
         android:text="自定义日历" />
 
     <Button
-        android:layout_marginTop="50dp"
         android:id="@+id/btn_anim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="水波纹动画"/>
+        android:layout_marginTop="50dp"
+        android:text="水波纹动画" />
+
     <Button
-        android:layout_marginTop="100dp"
         android:id="@+id/btn_chart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="图表"/>
+        android:layout_marginTop="100dp"
+        android:text="图表" />
+
+    <Button
+        android:id="@+id/btn_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="服务aidl" />
+
 
 </FrameLayout>

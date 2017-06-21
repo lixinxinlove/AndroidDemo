@@ -10,6 +10,7 @@ import com.lee.androiddemo.R;
 import com.lee.androiddemo.activity.AnimatorActivity;
 import com.lee.androiddemo.activity.CalendarActivity;
 import com.lee.androiddemo.activity.MPAndroidChartActivity;
+import com.lee.androiddemo.activity.ServiceActivity;
 
 
 public class MyFragment extends BaseFragment implements View.OnClickListener {
@@ -18,6 +19,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     Button btnCalender;
     Button btnAnim;
     Button btnChart;
+    Button btnService;
 
     public MyFragment() {
     }
@@ -39,6 +41,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         btnCalender = (Button) rootView.findViewById(R.id.btn_calender);
         btnAnim = (Button) rootView.findViewById(R.id.btn_anim);
         btnChart = (Button) rootView.findViewById(R.id.btn_chart);
+        btnService = (Button) rootView.findViewById(R.id.btn_service);
     }
 
     @Override
@@ -51,6 +54,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         btnCalender.setOnClickListener(this);
         btnAnim.setOnClickListener(this);
         btnChart.setOnClickListener(this);
+        btnService.setOnClickListener(this);
     }
 
 
@@ -66,10 +70,13 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             case R.id.btn_chart:
                 getActivity().startActivity(new Intent(getActivity(), MPAndroidChartActivity.class));
                 break;
+            case R.id.btn_service:
+                getActivity().startActivity(new Intent(getActivity(), ServiceActivity.class));
+                break;
             default:
                 break;
         }
-
-
     }
+
+
 }

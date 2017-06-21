@@ -27,7 +27,14 @@
         <activity android:name=".activity.FragmentTabHostActivity" />
         <activity android:name=".activity.CalendarActivity" />
         <activity android:name=".activity.AnimatorActivity" />
-        <activity android:name=".activity.MPAndroidChartActivity"></activity>
+        <activity android:name=".activity.MPAndroidChartActivity" />
+
+        <service
+            android:name=".service.LeeService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".activity.ServiceActivity"></activity>
     </application>
 
 </manifest>
