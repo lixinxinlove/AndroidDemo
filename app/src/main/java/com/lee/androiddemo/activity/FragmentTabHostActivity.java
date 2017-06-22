@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.TabHost;
 
 import com.lee.androiddemo.R;
-import com.lee.androiddemo.fragment.FlexboxFragment;
+import com.lee.androiddemo.fragment.FlexBoxFragment;
 import com.lee.androiddemo.fragment.HomeFragment;
 import com.lee.androiddemo.fragment.MyFragment;
 import com.lee.androiddemo.fragment.ViewFragment;
@@ -29,7 +29,7 @@ public class FragmentTabHostActivity extends BaseActivity {
     @BindView(R.id.fragment_tab_host)
     FragmentTabHost mTabHost;
     //定义数组存放Fragment
-    private final Class fragmentArray[] = {MyFragment.class, HomeFragment.class, FlexboxFragment.class, ViewFragment.class};
+    private final Class fragmentArray[] = {MyFragment.class, HomeFragment.class, FlexBoxFragment.class, ViewFragment.class};
     private int mImageViewArray[] = IconValues.homeTabArr;
     private String mTextViewArray[] = IconValues.homeTabTextArr;
     private String mTabIdArray[] = {"home", "lll", "eee", "my"};
@@ -41,7 +41,7 @@ public class FragmentTabHostActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Typeface typeFace = Typeface.createFromAsset(getAssets(), "bebasneue_webfont.ttf");
+        Typeface typeFace = Typeface.createFromAsset(getAssets(), "font/bebasneue_webfont.ttf");
         //revenueSum.setTypeface(typeFace);
 
 

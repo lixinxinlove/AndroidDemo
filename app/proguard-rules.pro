@@ -19,3 +19,8 @@
 
 -dontwarn okhttp3.**
 -dontwarn okio.**
+
+#-----------------BaseRecyclerViewAdapterHelper---------------------
+-keep class com.chad.library.adapter.** {
+   *;
+}
