@@ -26,7 +26,7 @@ public class ViewFragment extends BaseFragment {
     @Override
     protected void initData() {
 
-        ValueAnimator anim = ValueAnimator.ofFloat(0f, 3f, 2f, 1f, -5f);
+        ValueAnimator anim = ValueAnimator.ofFloat(0f, 3f, 2f, -5f);
         anim.setDuration(5000);
         anim.setRepeatCount(10000);
         anim.setRepeatMode(ValueAnimator.REVERSE);
@@ -41,13 +41,14 @@ public class ViewFragment extends BaseFragment {
                 ivLogo.setLayoutParams(param);
             }
         });
-        anim.setStartDelay(1000);
-
+        anim.setStartDelay(2000);
+        anim.start();
 
         ObjectAnimator animator = ObjectAnimator.ofFloat(ivLogo, "alpha", 1f, 0f, 1f);
         animator.setDuration(5000);
         animator.setRepeatCount(1000);
-        animator.setStartDelay(1000);
+        animator.setStartDelay(2000);
+        animator.start();
     }
 
     @Override

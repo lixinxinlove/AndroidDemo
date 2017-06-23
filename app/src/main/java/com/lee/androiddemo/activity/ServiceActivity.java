@@ -9,18 +9,25 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lee.androiddemo.GlideApp;
 import com.lee.androiddemo.ILeeAidlInterface;
 import com.lee.androiddemo.R;
 import com.lee.androiddemo.service.LeeService;
 
 public class ServiceActivity extends AppCompatActivity {
 
+
+    String url = "https://ws1.sinaimg.cn/large/610dc034ly1fgepc1lpvfj20u011i0wv.jpg";
+
     private ILeeAidlInterface ieeAidlInterface;
 
-
     private TextView textView;
+
+    private ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +36,16 @@ public class ServiceActivity extends AppCompatActivity {
 
         textView = (TextView) findViewById(R.id.tv);
 
+        imageView = (ImageView) findViewById(R.id.iv_net);
+
         Intent intent = new Intent(this, LeeService.class);
         bindService(intent, conn, Service.BIND_AUTO_CREATE);
+
+        GlideApp.with(this).load(url).into(imageView);
     }
 
 
     private ServiceConnection conn = new ServiceConnection() {
-
 
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -55,7 +65,6 @@ public class ServiceActivity extends AppCompatActivity {
             unbindService(conn);
         }
     }
-
 
     public void add(View view) {
         int content;
