@@ -35,12 +35,7 @@ public class MyGlideModule extends AppGlideModule {
         }
         //重新设置内存限制
         builder.setMemoryCache(new LruResourceCache(10 * 1024 * 1024));
-        //  super.applyOptions(context, builder);
-
-        //  builder.setDiskCache(new InternalCacheDiskCacheFactory(context, 100 * 1024 * 1024));
-      //  builder.setDiskCache(new ExternalCacheDiskCacheFactory(context, filePath, 100 * 1024 * 1024));
-
-        //设置缓存目录和 大小
+        //设置缓存目录和大小
         builder.setDiskCache(new DiskLruCacheFactory(filePath, 100 * 1024 * 1024));
     }
 

@@ -11,11 +11,27 @@
         android:layout_height="wrap_content"
         android:textSize="20sp" />
 
-    <Button
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="add"
-        android:text="请求服务" />
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="add"
+            android:text="请求服务" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="deleteFile"
+            android:text="删除缓存" />
+
+
+    </LinearLayout>
 
 
     <ImageView

@@ -5,9 +5,11 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +18,8 @@ import com.lee.androiddemo.GlideApp;
 import com.lee.androiddemo.ILeeAidlInterface;
 import com.lee.androiddemo.R;
 import com.lee.androiddemo.service.LeeService;
+
+import java.io.File;
 
 public class ServiceActivity extends AppCompatActivity {
 
@@ -42,6 +46,51 @@ public class ServiceActivity extends AppCompatActivity {
         bindService(intent, conn, Service.BIND_AUTO_CREATE);
 
         GlideApp.with(this).load(url).into(imageView);
+
+    }
+
+    private void glideConfig() {
+        String filePath = Environment.getExternalStorageDirectory().getPath() + "/Glide";
+        File file1 = GlideApp.getPhotoCacheDir(this, filePath);
+        if (file1.exists()) {
+            deleteFolderFile(filePath,true);
+        }
+    }
+
+    /**
+     * 删除指定目录下的文件，这里用于缓存的删除
+     *
+     * @param filePath filePath
+     * @param deleteThisPath deleteThisPath
+     */
+    private void deleteFolderFile(String filePath, boolean deleteThisPath) {
+        if (!TextUtils.isEmpty(filePath)) {
+            try {
+                File file = new File(filePath);
+                if (file.isDirectory()) {
+                    File files[] = file.listFiles();
+                    for (File file1 : files) {
+                        deleteFolderFile(file1.getAbsolutePath(), true);
+                    }
+                }
+                if (deleteThisPath) {
+                    if (!file.isDirectory()) {
+                        file.delete();
+                    } else {
+                        if (file.listFiles().length == 0) {
+                            file.delete();
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private void deleteFile(){
+
     }
 
 
@@ -65,6 +114,12 @@ public class ServiceActivity extends AppCompatActivity {
             unbindService(conn);
         }
     }
+
+
+    public void deleteFile(View view) {
+        glideConfig();
+    }
+
 
     public void add(View view) {
         int content;
