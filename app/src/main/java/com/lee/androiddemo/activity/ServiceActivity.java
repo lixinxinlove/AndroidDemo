@@ -88,12 +88,6 @@ public class ServiceActivity extends AppCompatActivity {
         }
     }
 
-
-    private void deleteFile(){
-
-    }
-
-
     private ServiceConnection conn = new ServiceConnection() {
 
         @Override

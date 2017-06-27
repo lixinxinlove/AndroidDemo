@@ -4,9 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -37,7 +36,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activity.ServiceActivity"></activity>
+        <activity android:name=".activity.ServiceActivity" />
+        <activity android:name=".activity.Rxjava2Activity"></activity>
     </application>
 
 </manifest>
