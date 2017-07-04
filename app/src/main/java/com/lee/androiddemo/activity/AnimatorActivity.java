@@ -3,9 +3,9 @@ package com.lee.androiddemo.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
 import com.lee.androiddemo.R;
@@ -16,7 +16,7 @@ public class AnimatorActivity extends BaseActivity {
 
 
     @BindView(R.id.iv)
-   ImageView mImageView;
+    ImageView mImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +62,8 @@ public class AnimatorActivity extends BaseActivity {
 
     public void onClick2(View view) {
         Animator animator1 = ViewAnimationUtils.createCircularReveal(
-                mImageView, 0, 0, 0, (float) Math.hypot(mImageView.getWidth(), mImageView.getHeight()) + 20);//宽的平方加上高的平方的根号
-        animator1.setInterpolator(new LinearInterpolator());//插补器有没有不影响
+                mImageView, 0, 0, 0, (float) Math.hypot(mImageView.getWidth(), mImageView.getHeight()));//宽的平方加上高的平方的根号
+        animator1.setInterpolator(new LinearOutSlowInInterpolator());//插补器有没有不影响
         animator1.setDuration(2000);
         animator1.start();
         mImageView.setVisibility(View.VISIBLE);
@@ -81,7 +81,7 @@ public class AnimatorActivity extends BaseActivity {
     public void onClick3(View view) {
         int cenX = mImageView.getWidth() / 2;
         int cenY = mImageView.getHeight() / 2;
-        Animator an = ViewAnimationUtils.createCircularReveal(mImageView, cenX, cenY, 0,  (float) Math.hypot(mImageView.getWidth(), mImageView.getHeight()) );
+        Animator an = ViewAnimationUtils.createCircularReveal(mImageView, cenX, cenY, 0, (float) Math.hypot(mImageView.getWidth(), mImageView.getHeight()));
         an.setDuration(3000);
         an.start();
         mImageView.setVisibility(View.VISIBLE);
