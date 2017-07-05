@@ -1,6 +1,8 @@
 package com.lee.androiddemo.activity;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -74,7 +76,8 @@ public class UpdateActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void initData() {
-
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        builder = new Notification.Builder(this);
     }
 
     @Override
@@ -128,7 +131,7 @@ public class UpdateActivity extends BaseActivity implements View.OnClickListener
             Log.e(TAG, progress + "");
 
             tvProgress.setText("下载进度" + progress + "%");
-
+            postDownloadNotification(progress);
         }
 
         @Override
@@ -171,6 +174,25 @@ public class UpdateActivity extends BaseActivity implements View.OnClickListener
         }
 
         context.startActivity(intent);
+    }
+
+
+    private NotificationManager notificationManager;
+    private Notification.Builder builder;
+
+    public void postDownloadNotification(int progress) {
+        builder.setSmallIcon(R.mipmap.ic_launcher)
+                .setTicker("showProgressBar")
+                .setOngoing(true)
+                .setContentTitle("ContentTitle")
+                .setContentText("ContentText");
+        builder.setProgress(100, progress, false);
+        notificationManager.notify(0, builder.build());
+
+        if (progress == 100) {
+            builder.setContentTitle("Download complete").setProgress(0, 0, false).setOngoing(false);
+            notificationManager.notify(0, builder.build());
+        }
     }
 
 
