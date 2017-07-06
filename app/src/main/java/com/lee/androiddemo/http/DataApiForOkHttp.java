@@ -3,7 +3,7 @@ package com.lee.androiddemo.http;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.lee.androiddemo.Config;
+import com.lee.androiddemo.config.AppConfig;
 import com.lee.androiddemo.utils.GsonUtils;
 
 import java.io.IOException;
@@ -102,7 +102,7 @@ public class DataApiForOkHttp {
 
         @Override
         public void onFailure(Call arg0, IOException arg1) {
-            resEntity.code = Config.HTTP_REQUEST_FAILURE;
+            resEntity.code = AppConfig.HTTP_REQUEST_FAILURE;
             resEntity.message = "网络异常";
             mHandler.post(new Runnable() {
                 @Override
@@ -126,7 +126,7 @@ public class DataApiForOkHttp {
                     });
                 } catch (Exception e) {
                     e.printStackTrace();
-                    resEntity.code = Config.HTTP_REQUEST_JSON_ERROR;
+                    resEntity.code = AppConfig.HTTP_REQUEST_JSON_ERROR;
                     resEntity.message = "数据格式错误";
                     resEntity.data = res;
                     mHandler.post(new Runnable() {
@@ -164,7 +164,7 @@ public class DataApiForOkHttp {
         @Override
         public void onResponse(Call call, Response response) throws IOException {
             String res = response.body().string();
-            resEntity.code = Config.HTTP_REQUEST_SUCCESS;
+            resEntity.code = AppConfig.HTTP_REQUEST_SUCCESS;
             resEntity.data = res;
             resEntity.message = "执行成功";
 
@@ -178,7 +178,7 @@ public class DataApiForOkHttp {
 
         @Override
         public void onFailure(Call call, IOException e) {
-            resEntity.code = Config.HTTP_REQUEST_FAILURE;
+            resEntity.code = AppConfig.HTTP_REQUEST_FAILURE;
             resEntity.data = "";
             resEntity.message = "网络异常";
             mHandler.post(new Runnable() {
@@ -219,7 +219,7 @@ public class DataApiForOkHttp {
                     mCallback.RequestCallback(resEntity);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    resEntity.code = Config.HTTP_REQUEST_JSON_ERROR;
+                    resEntity.code = AppConfig.HTTP_REQUEST_JSON_ERROR;
                     resEntity.message = "数据格式错误";
                     resEntity.data = res;
                     mCallback.RequestCallback(resEntity);
@@ -229,7 +229,7 @@ public class DataApiForOkHttp {
 
         @Override
         public void onFailure(Call call, IOException e) {
-            resEntity.code = Config.HTTP_REQUEST_FAILURE;
+            resEntity.code = AppConfig.HTTP_REQUEST_FAILURE;
             resEntity.data = "";
             resEntity.message = "网络异常";
             mCallback.RequestCallback(resEntity);

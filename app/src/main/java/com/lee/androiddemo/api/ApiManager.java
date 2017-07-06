@@ -1,6 +1,6 @@
 package com.lee.androiddemo.api;
 
-import com.lee.androiddemo.Config;
+import com.lee.androiddemo.config.AppConfig;
 
 import java.util.concurrent.TimeUnit;
 
@@ -47,7 +47,7 @@ public class ApiManager {
     public MovieApi getMovieService() {
         if (mMovieApi == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Config.MOVIE_API_URL)
+                    .baseUrl(AppConfig.MOVIE_API_URL)
                     .client(mClient)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())

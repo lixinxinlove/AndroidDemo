@@ -1,9 +1,9 @@
-package com.lee.androiddemo;
+package com.lee.androiddemo.config;
 
 /**
  * Created by android on 2017/3/21.
  */
-public class Config {
+public class AppConfig {
 
     public static final boolean DEBUG = true;
     public static String DOUBAN_API_URL = "http://api.douban.com/v2/";

@@ -5,6 +5,7 @@ package com.lee.androiddemo.http;
  */
 
 public class Api {
+
     DataApiForOkHttp http = new DataApiForOkHttp();
 
     public void login(RequestCallback callback) {

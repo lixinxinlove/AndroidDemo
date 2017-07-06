@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.lee.androiddemo.GlideApp;
 import com.lee.androiddemo.ILeeAidlInterface;
 import com.lee.androiddemo.R;
@@ -45,7 +46,12 @@ public class ServiceActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LeeService.class);
         bindService(intent, conn, Service.BIND_AUTO_CREATE);
 
-        GlideApp.with(this).load(url).into(imageView);
+        GlideApp.with(this)
+                .load(url)
+                .dontAnimate()
+                .placeholder(R.mipmap.ic_launcher)
+                .transform(new CircleCrop())   // 1.CircleCrop() 圆     2.RoundedCorners(20) 圆角
+                .into(imageView);
 
     }
 
@@ -53,14 +59,14 @@ public class ServiceActivity extends AppCompatActivity {
         String filePath = Environment.getExternalStorageDirectory().getPath() + "/Glide";
         File file1 = GlideApp.getPhotoCacheDir(this, filePath);
         if (file1.exists()) {
-            deleteFolderFile(filePath,true);
+            deleteFolderFile(filePath, true);
         }
     }
 
     /**
      * 删除指定目录下的文件，这里用于缓存的删除
      *
-     * @param filePath filePath
+     * @param filePath       filePath
      * @param deleteThisPath deleteThisPath
      */
     private void deleteFolderFile(String filePath, boolean deleteThisPath) {
