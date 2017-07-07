@@ -56,7 +56,8 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".activity.TabLayoutActivity"></activity>
+        <activity android:name=".activity.TabLayoutActivity" />
+        <activity android:name=".activity.GestureLockActivity"></activity>
     </application>
 
 </manifest>

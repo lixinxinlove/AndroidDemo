@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.lee.androiddemo.R;
 import com.lee.androiddemo.activity.AnimatorActivity;
 import com.lee.androiddemo.activity.CalendarActivity;
+import com.lee.androiddemo.activity.GestureLockActivity;
 import com.lee.androiddemo.activity.MPAndroidChartActivity;
 import com.lee.androiddemo.activity.Rxjava2Activity;
 import com.lee.androiddemo.activity.ServiceActivity;
@@ -24,6 +25,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     Button btnService;
     Button btnRx;
     Button btnDown;
+    Button btnPassword;
 
     public MyFragment() {
     }
@@ -48,6 +50,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         btnService = (Button) rootView.findViewById(R.id.btn_service);
         btnRx = (Button) rootView.findViewById(R.id.btn_rxjava);
         btnDown = (Button) rootView.findViewById(R.id.btn_down);
+        btnPassword = (Button) rootView.findViewById(R.id.btn_password);
     }
 
     @Override
@@ -63,6 +66,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         btnService.setOnClickListener(this);
         btnRx.setOnClickListener(this);
         btnDown.setOnClickListener(this);
+        btnPassword.setOnClickListener(this);
     }
 
 
@@ -85,7 +89,10 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 getActivity().startActivity(new Intent(getActivity(), Rxjava2Activity.class));
                 break;
             case R.id.btn_down:
-               getActivity().startActivity(new Intent(getActivity(), UpdateActivity.class));
+                getActivity().startActivity(new Intent(getActivity(), UpdateActivity.class));
+                break;
+            case R.id.btn_password:
+                getActivity().startActivity(new Intent(getActivity(), GestureLockActivity.class));
                 break;
 
             default:
