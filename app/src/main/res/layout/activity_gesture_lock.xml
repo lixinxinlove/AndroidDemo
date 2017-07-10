@@ -5,10 +5,17 @@
 
 
     <com.lee.androiddemo.view.GestureLockView
-        android:background="@color/color1"
         android:id="@+id/gesture_lock_view"
         android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true" />
+        android:layout_height="400dp"
+        android:layout_centerInParent="true"
+        android:background="@color/color1" />
+
+
+    <Button
+        android:text="网络请求"
+        android:id="@+id/btn_rx_rt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

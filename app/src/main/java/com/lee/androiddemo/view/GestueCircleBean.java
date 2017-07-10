@@ -47,7 +47,6 @@ public class GestueCircleBean {
         this.onTouch = onTouch;
     }
 
-
     public boolean isPointIn(int x, int y) {
         double distance = Math.sqrt((x - ox) * (x - ox) + (y - oy) * (y - oy));
         return distance < r;
