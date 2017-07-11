@@ -13,4 +13,13 @@ public class Api {
         http.getData(url, callback);
     }
 
+
+    public void test(RequestCallback callback) {
+        String url = "http://mallapi.ecoology.cn/v1/Product/Detail?standardId=100000001073&refreshToken=LmqvNOsjYcouPHnMykfKTNYHRoEkKLTvSiRtrbNImOwYFyPEFMJeyzwppaqPSkqs";
+        http.getData(url, callback);
+
+
+    }
+
+
 }

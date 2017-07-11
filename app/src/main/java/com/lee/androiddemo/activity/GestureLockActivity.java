@@ -7,8 +7,7 @@ import android.widget.Button;
 
 import com.lee.androiddemo.R;
 import com.lee.androiddemo.api.ApiManager;
-import com.lee.androiddemo.api.data.MovieResponse;
-import com.lee.androiddemo.api.data.RetDataBean;
+import com.lee.androiddemo.api.data.GankAndroid;
 import com.lee.androiddemo.view.GestureLockView;
 
 import butterknife.BindView;
@@ -23,7 +22,7 @@ public class GestureLockActivity extends BaseActivity implements View.OnClickLis
 
     private static final String TAG = "GestureLockActivity";
 
-    private Observable<MovieResponse<RetDataBean>> observable;
+    private Observable<GankAndroid> observable;
 
 
     @BindView(R.id.gesture_lock_view)
@@ -41,17 +40,18 @@ public class GestureLockActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void rxhttp() {
-        observable = ApiManager.getInstence().getMovieService().getHomePage();
 
-        observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<MovieResponse<RetDataBean>>() {
+
+        observable = ApiManager.getInstence().getGankService().getAndroid(10, 1);
+
+        observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<GankAndroid>() {
             @Override
             public void onSubscribe(Disposable d) {
-
             }
 
             @Override
-            public void onNext(MovieResponse<RetDataBean> value) {
-                Log.e("onNext", value.getMsg());
+            public void onNext(GankAndroid value) {
+                Log.e("onNext", value.getResults().get(0).toString());
             }
 
             @Override

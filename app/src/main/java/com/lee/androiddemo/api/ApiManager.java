@@ -16,6 +16,9 @@ public class ApiManager {
 
 
     private MovieApi mMovieApi;
+
+    private GankIO mGankIO;
+
     private static ApiManager sApiManager;
 
     private static OkHttpClient mClient;
@@ -34,7 +37,7 @@ public class ApiManager {
         }
         mClient = new OkHttpClient.Builder()
                 // .addInterceptor(new CustomInterceptor())
-                .connectTimeout(5, TimeUnit.SECONDS)
+                .connectTimeout(15, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .build();
         return sApiManager;
@@ -57,5 +60,21 @@ public class ApiManager {
         return mMovieApi;
     }
 
+
+    /**
+     * 封装干货API
+     */
+    public GankIO getGankService() {
+        if (mGankIO == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://gank.io/api/data/")
+                    .client(mClient)
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            mGankIO = retrofit.create(GankIO.class);
+        }
+        return mGankIO;
+    }
 
 }

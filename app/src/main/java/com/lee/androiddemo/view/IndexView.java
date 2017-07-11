@@ -25,7 +25,7 @@ public class IndexView extends View {
             "S", "T", "U", "V", "W", "X",
             "Y", "Z"};
 
-    private static final String TAG = "TAG";
+    private static final String TAG = "IndexView";
 
     private Paint mPaint;
 
@@ -56,7 +56,6 @@ public class IndexView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         for (int i = 0; i < LETTERS.length; i++) {
             String text = LETTERS[i];
             // 计算坐标
@@ -66,15 +65,11 @@ public class IndexView extends View {
             mPaint.getTextBounds(text, 0, text.length(), bounds);
             int textHeight = bounds.height();
             int y = (int) (cellHeight / 2.0f + textHeight / 2.0f + i * cellHeight);
-
             // 根据按下的字母, 设置画笔颜色
             mPaint.setColor(touchIndex == i ? Color.GRAY : Color.WHITE);
-
             // 绘制文本A-Z
             canvas.drawText(text, x, y, mPaint);
         }
-
-
     }
 
     int touchIndex = -1;
@@ -120,7 +115,7 @@ public class IndexView extends View {
                 break;
             case MotionEvent.ACTION_UP:
                 touchIndex = -1;
-                if(listener!=null){
+                if (listener != null) {
                     listener.onHiddenLetter();
                 }
                 break;

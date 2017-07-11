@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.lee.androiddemo.App;
 import com.lee.androiddemo.R;
 import com.lee.androiddemo.adapter.UserIndexAdapter2;
 import com.lee.androiddemo.config.AppConfig;
@@ -64,7 +65,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initData() {
         //tv.setText(title);
-        // App.api.login(callback);
+        App.api.test(callback);
         mData = new ArrayList<>();
         mData = Arrays.asList(AppConfig.NAMES);
         Collections.sort(mData, Collator.getInstance(java.util.Locale.CHINA));
@@ -119,8 +120,11 @@ public class HomeFragment extends BaseFragment {
     private RequestCallback callback = new RequestCallback() {
         @Override
         public void RequestCallback(ResponseEntity res) {
-            if (res.code.equals("0")) {
-            }
+
+
+            Log.e("Lee",res.data);
+
+
         }
     };
 
