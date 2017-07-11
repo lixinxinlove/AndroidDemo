@@ -4,11 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.lee.androiddemo.R;
-
 import net.sourceforge.pinyin4j.PinyinHelper;
-
 import java.util.List;
 
 /**
@@ -19,7 +16,7 @@ public class UserIndexAdapter extends RecyclerView.Adapter<UserIndexAdapter.View
 
     private List<String> mData;
 
-    private String mCurrentChar = "v";
+    private String mCurrentChar = "";
 
     public UserIndexAdapter(List<String> mData) {
         this.mData = mData;
@@ -36,15 +33,15 @@ public class UserIndexAdapter extends RecyclerView.Adapter<UserIndexAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String[] ar = PinyinHelper.toHanyuPinyinStringArray(mData.get(position).charAt(0));
+        holder.tvText.setText(mData.get(position));
 
         if (mCurrentChar.equals(ar[0].substring(0, 1))) {
             holder.tvTop.setVisibility(View.GONE);
         } else {
-            holder.tvTop.setText(ar[0].substring(0, 1));
+            holder.tvTop.setText(ar[0].substring(0, 1).toUpperCase());
             holder.tvTop.setVisibility(View.VISIBLE);
+            mCurrentChar = ar[0].substring(0, 1);
         }
-        mCurrentChar = ar[0].substring(0, 1);
-        holder.tvText.setText(mData.get(position));
     }
 
     @Override
@@ -52,7 +49,7 @@ public class UserIndexAdapter extends RecyclerView.Adapter<UserIndexAdapter.View
         return mData.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tvTop;
         public TextView tvText;

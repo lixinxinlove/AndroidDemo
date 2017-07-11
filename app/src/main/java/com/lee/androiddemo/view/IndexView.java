@@ -88,7 +88,7 @@ public class IndexView extends View {
                 // 获取当前触摸到的字母索引
                 index = (int) (event.getY() / cellHeight);
                 if (index >= 0 && index < LETTERS.length) {
-                   // Toast.makeText(getContext(), LETTERS[index] + "", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getContext(), LETTERS[index] + "", Toast.LENGTH_SHORT).show();
 
                     touchIndex = index;
                     // 判断是否跟上一次触摸到的一样
@@ -120,6 +120,9 @@ public class IndexView extends View {
                 break;
             case MotionEvent.ACTION_UP:
                 touchIndex = -1;
+                if(listener!=null){
+                    listener.onHiddenLetter();
+                }
                 break;
             default:
                 touchIndex = -1;
@@ -151,6 +154,8 @@ public class IndexView extends View {
     public interface OnIndexTypeListener {
 
         void onIndex(String index);
+
+        void onHiddenLetter();
     }
 
 }
