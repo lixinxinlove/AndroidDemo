@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 /**
  * Created by lixinxin on 2017/4/10.
@@ -89,8 +88,7 @@ public class IndexView extends View {
                 // 获取当前触摸到的字母索引
                 index = (int) (event.getY() / cellHeight);
                 if (index >= 0 && index < LETTERS.length) {
-
-                    Toast.makeText(getContext(), LETTERS[index] + "", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getContext(), LETTERS[index] + "", Toast.LENGTH_SHORT).show();
 
                     touchIndex = index;
                     // 判断是否跟上一次触摸到的一样
@@ -101,16 +99,22 @@ public class IndexView extends View {
 //                        Log.d(TAG, "onTouchEvent: " + LETTERS[index]);
 //                        touchIndex = index;
 //                    }
-                }
 
+                    if (listener != null) {
+                        listener.onIndex(LETTERS[index]);
+                    }
+                }
 
                 break;
             case MotionEvent.ACTION_MOVE:
                 index = (int) (event.getY() / cellHeight);
-                if(index >= 0 && index < LETTERS.length){
+                if (index >= 0 && index < LETTERS.length) {
                     // 判断是否跟上一次触摸到的一样
-                    if(index != touchIndex){
+                    if (index != touchIndex) {
                         touchIndex = index;
+                        if (listener != null) {
+                            listener.onIndex(LETTERS[index]);
+                        }
                     }
                 }
                 break;
@@ -134,6 +138,19 @@ public class IndexView extends View {
 
         int mHeight = getMeasuredHeight();
         cellHeight = mHeight * 1.0f / LETTERS.length;
-
     }
+
+
+    private OnIndexTypeListener listener;
+
+    public void setOnIndexTypeListener(OnIndexTypeListener listener) {
+        this.listener = listener;
+    }
+
+
+    public interface OnIndexTypeListener {
+
+        void onIndex(String index);
+    }
+
 }

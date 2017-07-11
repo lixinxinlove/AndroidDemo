@@ -2,26 +2,40 @@ package com.lee.androiddemo.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.lee.androiddemo.App;
 import com.lee.androiddemo.R;
+import com.lee.androiddemo.adapter.UserIndexAdapter;
+import com.lee.androiddemo.config.AppConfig;
 import com.lee.androiddemo.http.RequestCallback;
 import com.lee.androiddemo.http.ResponseEntity;
+import com.lee.androiddemo.view.IndexView;
+
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 
 public class HomeFragment extends BaseFragment {
 
+    private IndexView mIndexView;
+    private RecyclerView mRecyclerView;
 
-    private TextView tv;
+
     private String title;
 
+
+    private UserIndexAdapter adapter;
+
+    private List<String> mData;
+
     public HomeFragment() {
+
     }
 
     @Override
@@ -33,12 +47,6 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
     @Override
     protected int getContextView() {
         return R.layout.fragment_home;
@@ -46,41 +54,52 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void findView() {
-        tv = (TextView) rootView.findViewById(R.id.textView);
+        mIndexView = (IndexView) rootView.findViewById(R.id.index);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_user);
     }
 
     @Override
     protected void initData() {
-        tv.setText(title);
+        //tv.setText(title);
+        // App.api.login(callback);
+        mData = new ArrayList<>();
+        mData = Arrays.asList(AppConfig.NAMES);
 
-        App.api.login(callback);
 
+        Collections.sort(mData, Collator.getInstance(java.util.Locale.CHINA));
+
+        adapter = new UserIndexAdapter(mData);
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setAdapter(adapter);
     }
 
     @Override
     protected void initListener() {
-
+        mIndexView.setOnIndexTypeListener(new IndexView.OnIndexTypeListener() {
+            @Override
+            public void onIndex(String index) {
+                Toast.makeText(getActivity(), index, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-
     }
 
-    private RequestCallback callback=new RequestCallback() {
+    private RequestCallback callback = new RequestCallback() {
         @Override
         public void RequestCallback(ResponseEntity res) {
-           if (res.code.equals("0")){
-               tv.setText(res.data);
-           }
+            if (res.code.equals("0")) {
+            }
         }
     };
 

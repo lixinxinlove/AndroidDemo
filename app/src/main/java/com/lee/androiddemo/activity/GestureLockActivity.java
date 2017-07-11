@@ -36,7 +36,6 @@ public class GestureLockActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         btnRxRt.setOnClickListener(this);
 
     }
