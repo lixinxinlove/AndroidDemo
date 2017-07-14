@@ -17,8 +17,6 @@ public class Api {
     public void test(RequestCallback callback) {
         String url = "http://mallapi.ecoology.cn/v1/Product/Detail?standardId=100000001073&refreshToken=LmqvNOsjYcouPHnMykfKTNYHRoEkKLTvSiRtrbNImOwYFyPEFMJeyzwppaqPSkqs";
         http.getData(url, callback);
-
-
     }
 
 

@@ -14,6 +14,7 @@ import com.lee.androiddemo.activity.MPAndroidChartActivity;
 import com.lee.androiddemo.activity.Rxjava2Activity;
 import com.lee.androiddemo.activity.ServiceActivity;
 import com.lee.androiddemo.activity.UpdateActivity;
+import com.lee.androiddemo.activity.WebViewActivity;
 
 
 public class MyFragment extends BaseFragment implements View.OnClickListener {
@@ -26,6 +27,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     Button btnRx;
     Button btnDown;
     Button btnPassword;
+    Button btnWeb;
 
     public MyFragment() {
     }
@@ -51,6 +53,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         btnRx = (Button) rootView.findViewById(R.id.btn_rxjava);
         btnDown = (Button) rootView.findViewById(R.id.btn_down);
         btnPassword = (Button) rootView.findViewById(R.id.btn_password);
+        btnWeb = (Button) rootView.findViewById(R.id.btn_web);
     }
 
     @Override
@@ -67,6 +70,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         btnRx.setOnClickListener(this);
         btnDown.setOnClickListener(this);
         btnPassword.setOnClickListener(this);
+        btnWeb.setOnClickListener(this);
     }
 
 
@@ -94,7 +98,9 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             case R.id.btn_password:
                 getActivity().startActivity(new Intent(getActivity(), GestureLockActivity.class));
                 break;
-
+            case R.id.btn_web:
+                getActivity().startActivity(new Intent(getActivity(), WebViewActivity.class));
+                break;
             default:
                 break;
         }

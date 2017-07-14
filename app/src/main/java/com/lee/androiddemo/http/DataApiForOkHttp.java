@@ -37,9 +37,9 @@ public class DataApiForOkHttp {
         Request.Builder requestBuilder = new Request.Builder().url(url);
         requestBuilder.method(GET_METHOD, null);
         Request request = requestBuilder.build();
-        Call mcall = http.newCall(request);
-        callback.setmCall(mcall);
-        mcall.enqueue(new EventRequestCallbackImpl(callback));
+        Call mCall = http.newCall(request);
+        callback.setmCall(mCall);
+        mCall.enqueue(new EventRequestCallbackImpl(callback));
     }
 
     public void post(FormBody body, String url, RequestCallback callback) {
@@ -76,8 +76,8 @@ public class DataApiForOkHttp {
         //FormBody body = builder.add("", "").build();
         requestBuilder.post(body).build();
         Request request = requestBuilder.post(body).build();
-        Call mcall = http.newCall(request);
-        mcall.enqueue(new EventRequestCallbackAsyncImpl(callback));
+        Call mCall = http.newCall(request);
+        mCall.enqueue(new EventRequestCallbackAsyncImpl(callback));
     }
 
 

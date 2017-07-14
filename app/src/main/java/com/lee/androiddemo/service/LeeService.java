@@ -8,8 +8,10 @@ import android.os.RemoteException;
 import com.lee.androiddemo.ILeeAidlInterface;
 
 public class LeeService extends Service {
+
     public LeeService() {
     }
+
 
     ILeeAidlInterface.Stub binder = new ILeeAidlInterface.Stub() {
         @Override
@@ -18,9 +20,9 @@ public class LeeService extends Service {
         }
     };
 
+
     @Override
     public IBinder onBind(Intent intent) {
-
         return binder;
     }
 }

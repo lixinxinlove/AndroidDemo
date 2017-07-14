@@ -58,7 +58,8 @@
 
         <activity android:name=".activity.TabLayoutActivity" />
         <activity android:name=".activity.GestureLockActivity" />
-        <activity android:name=".activity.RecyclerViewActivity"></activity>
+        <activity android:name=".activity.RecyclerViewActivity" />
+        <activity android:name=".activity.WebViewActivity"></activity>
     </application>
 
 </manifest>

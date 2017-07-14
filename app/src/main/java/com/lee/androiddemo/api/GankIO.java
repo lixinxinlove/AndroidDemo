@@ -3,6 +3,7 @@ package com.lee.androiddemo.api;
 import com.lee.androiddemo.api.data.GankAndroid;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -14,5 +15,8 @@ public interface GankIO {
 
     @GET("Android/{month}/{day}")
     Observable<GankAndroid> getAndroid(@Path("month") int month, @Path("day") int day);
+
+    @GET("Android/{month}/{day}")
+    Call<GankAndroid> getAndroid2(@Path("month") int month, @Path("day") int day);
 
 }
