@@ -9,6 +9,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.lee.androiddemo.R;
 
@@ -24,6 +25,9 @@ public class WebViewActivity extends BaseActivity {
     WebView webView;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+
+    @BindView(R.id.tv_progress)
+    TextView tvProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,22 +46,22 @@ public class WebViewActivity extends BaseActivity {
     @Override
     protected void initData() {
 
-
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
-
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 progressBar.setVisibility(View.VISIBLE);
+                tvProgress.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 progressBar.setVisibility(View.GONE);
+                tvProgress.setVisibility(View.GONE);
             }
 
             @Override
@@ -70,6 +74,9 @@ public class WebViewActivity extends BaseActivity {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
+
+                tvProgress.setText(newProgress + "%");
+
             }
         });
 
