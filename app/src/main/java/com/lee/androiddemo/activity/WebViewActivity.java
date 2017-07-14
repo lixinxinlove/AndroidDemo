@@ -37,7 +37,6 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-
     }
 
     @Override
@@ -74,11 +73,6 @@ public class WebViewActivity extends BaseActivity {
             }
         });
 
-
         webView.loadUrl("https://www.baidu.com/");
-
-
     }
-
-
 }
