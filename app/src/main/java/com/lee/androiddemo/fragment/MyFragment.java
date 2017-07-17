@@ -9,12 +9,12 @@ import android.widget.Button;
 import com.lee.androiddemo.R;
 import com.lee.androiddemo.activity.AnimatorActivity;
 import com.lee.androiddemo.activity.CalendarActivity;
+import com.lee.androiddemo.activity.DialogFragmentActivity;
 import com.lee.androiddemo.activity.GestureLockActivity;
 import com.lee.androiddemo.activity.MPAndroidChartActivity;
 import com.lee.androiddemo.activity.Rxjava2Activity;
 import com.lee.androiddemo.activity.ServiceActivity;
 import com.lee.androiddemo.activity.UpdateActivity;
-import com.lee.androiddemo.activity.WebViewActivity;
 
 
 public class MyFragment extends BaseFragment implements View.OnClickListener {
@@ -99,7 +99,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 getActivity().startActivity(new Intent(getActivity(), GestureLockActivity.class));
                 break;
             case R.id.btn_web:
-                getActivity().startActivity(new Intent(getActivity(), WebViewActivity.class));
+                getActivity().startActivity(new Intent(getActivity(), DialogFragmentActivity.class));
                 break;
             default:
                 break;

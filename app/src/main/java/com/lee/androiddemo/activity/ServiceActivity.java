@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.lee.androiddemo.GlideApp;
 import com.lee.androiddemo.ILeeAidlInterface;
 import com.lee.androiddemo.R;
@@ -48,11 +47,13 @@ public class ServiceActivity extends AppCompatActivity {
 
         GlideApp.with(this)
                 .load(url)
+                .centerCrop()
                 .dontAnimate()
+                .error(R.mipmap.mao)
                 .placeholder(R.mipmap.ic_launcher)
-                .transform(new CircleCrop())   // 1.CircleCrop() 圆     2.RoundedCorners(20) 圆角
                 .into(imageView);
 
+        //    .transform(new CircleCrop())   // 1.CircleCrop() 圆     2.RoundedCorners(20) 圆角
     }
 
     private void glideConfig() {
