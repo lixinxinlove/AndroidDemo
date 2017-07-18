@@ -60,7 +60,8 @@
         <activity android:name=".activity.GestureLockActivity" />
         <activity android:name=".activity.RecyclerViewActivity" />
         <activity android:name=".activity.WebViewActivity" />
-        <activity android:name=".activity.DialogFragmentActivity"></activity>
+        <activity android:name=".activity.DialogFragmentActivity" />
+        <activity android:name=".activity.PhotoActivity"></activity>
     </application>
 
 </manifest>

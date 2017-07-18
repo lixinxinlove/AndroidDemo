@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.lee.androiddemo.R;
 
 public class MainActivity extends AppCompatActivity
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ImmersionBar.with(this).transparentBar().barAlpha(0.1f).fitsSystemWindows(true).init();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
