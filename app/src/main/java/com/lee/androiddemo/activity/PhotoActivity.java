@@ -188,10 +188,12 @@ public class PhotoActivity extends BaseActivity implements View.OnClickListener 
             case R.id.album_layout:
                 openPhotoLibraryMenu();
                 rootView.setAlpha(0.5f);
+                btnAddImgPop.dismiss();
                 break;
             case R.id.camera_layout:
                 openImageCaptureMenu();
                 rootView.setAlpha(0.5f);
+                btnAddImgPop.dismiss();
                 break;
             case R.id.cancel_layout:
                 btnAddImgPop.dismiss();
