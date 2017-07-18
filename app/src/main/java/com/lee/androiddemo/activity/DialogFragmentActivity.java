@@ -1,7 +1,6 @@
 package com.lee.androiddemo.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.Gravity;
@@ -128,9 +127,7 @@ public class DialogFragmentActivity extends BaseActivity {
 
     private void showDialog() {
         LeeDialog ldf = new LeeDialog();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        // ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ldf.show(ft, "df");
+        ldf.show(getSupportFragmentManager(), "df");
     }
 
 
