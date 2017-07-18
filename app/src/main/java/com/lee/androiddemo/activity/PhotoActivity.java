@@ -96,7 +96,7 @@ public class PhotoActivity extends BaseActivity implements View.OnClickListener 
         btnCancel.setOnClickListener(this);
         marketingPopView.setFocusableInTouchMode(true);
         // PopupWindow实例化
-        btnAddImgPop = new PopupWindow(marketingPopView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT, true);
+        btnAddImgPop = new PopupWindow(marketingPopView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
         btnAddImgPop.setAnimationStyle(R.style.LeeMenuAnimationFade);
         ColorDrawable dw = new ColorDrawable(0x99000000);
         btnAddImgPop.setBackgroundDrawable(dw);
@@ -183,21 +183,17 @@ public class PhotoActivity extends BaseActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.btn_select_image:
                 btnAddImgPop.showAtLocation(rootView, Gravity.BOTTOM, 0, 0);
-
                 break;
             case R.id.album_layout:
-                openPhotoLibraryMenu();
-                rootView.setAlpha(0.5f);
                 btnAddImgPop.dismiss();
+                openPhotoLibraryMenu();
                 break;
             case R.id.camera_layout:
-                openImageCaptureMenu();
-                rootView.setAlpha(0.5f);
                 btnAddImgPop.dismiss();
+                openImageCaptureMenu();
                 break;
             case R.id.cancel_layout:
                 btnAddImgPop.dismiss();
-                rootView.setAlpha(1f);
                 break;
             default:
                 break;
