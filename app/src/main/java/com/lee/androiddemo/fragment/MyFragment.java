@@ -11,6 +11,7 @@ import com.lee.androiddemo.activity.AnimatorActivity;
 import com.lee.androiddemo.activity.CalendarActivity;
 import com.lee.androiddemo.activity.GestureLockActivity;
 import com.lee.androiddemo.activity.MPAndroidChartActivity;
+import com.lee.androiddemo.activity.NoHistoryActivity;
 import com.lee.androiddemo.activity.Rxjava2Activity;
 import com.lee.androiddemo.activity.ServiceActivity;
 import com.lee.androiddemo.activity.UpdateActivity;
@@ -27,6 +28,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     Button btnDown;
     Button btnPassword;
     Button btnWeb;
+    Button btnNoHistory;
 
     public MyFragment() {
     }
@@ -53,6 +55,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         btnDown = (Button) rootView.findViewById(R.id.btn_down);
         btnPassword = (Button) rootView.findViewById(R.id.btn_password);
         btnWeb = (Button) rootView.findViewById(R.id.btn_web);
+        btnNoHistory = (Button) rootView.findViewById(R.id.btn_no_history);
     }
 
     @Override
@@ -70,6 +73,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         btnDown.setOnClickListener(this);
         btnPassword.setOnClickListener(this);
         btnWeb.setOnClickListener(this);
+        btnNoHistory.setOnClickListener(this);
     }
 
 
@@ -96,6 +100,9 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.btn_password:
                 getActivity().startActivity(new Intent(getActivity(), GestureLockActivity.class));
+                break;
+            case R.id.btn_no_history:
+                getActivity().startActivity(new Intent(getActivity(), NoHistoryActivity.class));
                 break;
             case R.id.btn_web:
 
