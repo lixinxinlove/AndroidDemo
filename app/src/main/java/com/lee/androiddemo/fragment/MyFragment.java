@@ -11,7 +11,6 @@ import com.lee.androiddemo.activity.AnimatorActivity;
 import com.lee.androiddemo.activity.CalendarActivity;
 import com.lee.androiddemo.activity.GestureLockActivity;
 import com.lee.androiddemo.activity.MPAndroidChartActivity;
-import com.lee.androiddemo.activity.PhotoActivity;
 import com.lee.androiddemo.activity.Rxjava2Activity;
 import com.lee.androiddemo.activity.ServiceActivity;
 import com.lee.androiddemo.activity.UpdateActivity;
@@ -99,7 +98,13 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 getActivity().startActivity(new Intent(getActivity(), GestureLockActivity.class));
                 break;
             case R.id.btn_web:
-                getActivity().startActivity(new Intent(getActivity(), PhotoActivity.class));
+
+                Intent intent = new Intent();
+                intent.setAction("com.lee.androiddemo.work");
+                intent.setPackage("com.lee.androiddemo");
+                getActivity().sendBroadcast(intent);
+
+                //getActivity().startActivity(new Intent(getActivity(), PhotoActivity.class));
                 break;
             default:
                 break;

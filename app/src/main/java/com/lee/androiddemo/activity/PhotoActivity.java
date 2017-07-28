@@ -118,7 +118,6 @@ public class PhotoActivity extends BaseActivity implements View.OnClickListener 
             Uri uri = intent.getData();
 
 
-
             Cursor cursor = getContentResolver().query(uri, null, null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
                 String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
@@ -175,7 +174,6 @@ public class PhotoActivity extends BaseActivity implements View.OnClickListener 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddKms");
         return dateFormat.format(date) + ".jpg";
     }
-
 
     @Override
     public void onClick(View v) {
