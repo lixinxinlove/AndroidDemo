@@ -84,11 +84,6 @@ public class DialogFragmentActivity extends BaseActivity {
                 return convertView;
             }
         });
-
-
-
-
-
     }
 
     @Override
