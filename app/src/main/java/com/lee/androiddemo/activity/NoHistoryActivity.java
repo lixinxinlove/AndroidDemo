@@ -1,7 +1,6 @@
 package com.lee.androiddemo.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -23,12 +22,15 @@ public class NoHistoryActivity extends Activity {
         Toast.makeText(this, "NoHistoryActivity", Toast.LENGTH_LONG).show();
         Log.e("NoHistoryActivity", "onCreate");
 
-        startActivity(new Intent(this, GestureLockActivity.class));
+       // startActivity(new Intent(this, GestureLockActivity.class));
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Log.e("NoHistoryActivity", "onDestroy");
+
+
     }
+
 }

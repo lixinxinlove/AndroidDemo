@@ -10,12 +10,14 @@
         android:layout_height="wrap_content"
         android:text="下载" />
 
-
     <TextView
-        android:gravity="center"
         android:id="@+id/tv_progress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:ellipsize="middle"
+        android:maxEms="5"
+        android:singleLine="true"
+        android:text="您的左手还没剁，请及请及时打开手机淘宝进行剁手活动您的左手还没剁，请及时打开手剁手活动您的左手还没剁，请及时打开手机淘宝进行剁手活动" />
 
 
 </LinearLayout>

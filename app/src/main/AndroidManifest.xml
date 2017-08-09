@@ -64,12 +64,10 @@
         <activity android:name=".activity.WebViewActivity" />
         <activity android:name=".activity.DialogFragmentActivity" />
         <activity android:name=".activity.PhotoActivity" />
-
         <activity
             android:name=".activity.NoHistoryActivity"
             android:noHistory="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
-
 
         <!-- 广播接接受 -->
         <receiver
@@ -84,7 +82,17 @@
 
         <service
             android:name=".service.WorkIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <activity android:name=".activity.NotificationActivity" />
+        <activity
+            android:name=".activity.ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.NavigationActivity"
+            android:label="@string/title_activity_navigation"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
