@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lee.androiddemo.R;
 
@@ -27,6 +28,16 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        Glide.get(this).clearMemory();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Glide.get(MainActivity.this).clearDiskCache();
+            }
+        }).start();
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
