@@ -1,1 +1,1 @@
-include ':app', ':leelibrary', ':library'
+include ':app'

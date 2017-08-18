@@ -16,8 +16,7 @@ import com.lee.androiddemo.activity.Rxjava2Activity;
 import com.lee.androiddemo.activity.ScrollingActivity;
 import com.lee.androiddemo.activity.ServiceActivity;
 import com.lee.androiddemo.activity.UpdateActivity;
-
-import yellow5a5.actswitchanimtool.ActSwitchAnimTool;
+import com.lee.androiddemo.view.ActSwitchAnimTool;
 
 
 public class MyFragment extends BaseFragment implements View.OnClickListener {
