@@ -1,6 +1,7 @@
 package com.lee.androiddemo.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.lee.androiddemo.activity.Rxjava2Activity;
 import com.lee.androiddemo.activity.ScrollingActivity;
 import com.lee.androiddemo.activity.ServiceActivity;
 import com.lee.androiddemo.activity.UpdateActivity;
+
+import yellow5a5.actswitchanimtool.ActSwitchAnimTool;
 
 
 public class MyFragment extends BaseFragment implements View.OnClickListener {
@@ -84,7 +87,20 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 getActivity().startActivity(new Intent(getActivity(), AnimatorActivity.class));
                 break;
             case R.id.btn_calender:
-                getActivity().startActivity(new Intent(getActivity(), CalendarActivity.class));
+
+                Intent intent1 = new Intent(getActivity(), CalendarActivity.class);
+                ActSwitchAnimTool mFirstDemoActSwitchAnimTool = new ActSwitchAnimTool(getActivity()).setAnimType(ActSwitchAnimTool.MODE_UNINIT)
+
+                        .target(btnCalender)
+                        .setShrinkBack(false)
+                        .setmColorStart(Color.parseColor("#88FF5777"))
+                        .setmColorEnd(Color.parseColor("#88FF5777"))
+                        .startActivity(intent1, false);
+
+                mFirstDemoActSwitchAnimTool.setAnimType(ActSwitchAnimTool.MODE_SPREAD)
+                        .build();
+
+               // getActivity().startActivity(new Intent(getActivity(), CalendarActivity.class));
                 break;
             case R.id.btn_chart:
                 getActivity().startActivity(new Intent(getActivity(), MPAndroidChartActivity.class));

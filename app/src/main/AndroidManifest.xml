@@ -29,7 +29,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.EasyPermissionsActivity" />
         <activity android:name=".activity.FragmentTabHostActivity" />
-        <activity android:name=".activity.CalendarActivity" />
+        <activity android:name=".activity.CalendarActivity"
+
+            android:theme="@style/Anim_fade"
+
+            />
         <activity android:name=".activity.AnimatorActivity" />
         <activity android:name=".activity.MPAndroidChartActivity" />
 

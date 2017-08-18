@@ -10,6 +10,21 @@
 
     </style>
 
+
+    <style name="Anim_fade" parent="AppTheme">
+        <item name="android:windowAnimationStyle">@style/fade</item>
+    </style>
+
+    <style name="fade" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/menu_fadein</item>
+        <item name="android:activityOpenExitAnimation">@anim/menu_fadein</item>
+        <item name="android:activityCloseEnterAnimation">@anim/menu_fadein</item>
+        <item name="android:activityCloseExitAnimation">@anim/menu_fadein</item>
+    </style>
+
+
+
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
